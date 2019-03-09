@@ -2,8 +2,8 @@
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://2x-isi.anonymous.computerstore.exp.direct",
   "packagerNgrokUrl": "https://packager.2x-isi.anonymous.computerstore.exp.direct",
-  "ngrokPid": 21676,
+  "ngrokPid": 6532,
   "devToolsPort": 19002,
   "packagerPort": 19001,
-  "packagerPid": 17220
+  "packagerPid": 25108
 }

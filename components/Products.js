@@ -3,58 +3,72 @@ import { StyleSheet, View, Text, Image, Dimensions, TouchableHighlight } from 'r
 
 import {  Card } from 'react-native-elements'
 
+import devices from '../devices'
+
+import convert from 'color-convert'
+
+const Product = ({computer, onClickView}) => (
+    <TouchableHighlight underlayColor={'white'} onPress = {() => onClickView(computer)}>
+        <View>
+            <Card title= {computer.name}>
+                <View style={styles.imageContainer}>
+                    <Image
+                        style={styles.productImage}
+                        resizeMode="cover"
+                        source={{ uri: computer.picture }}
+                    />
+                </View>
+
+                <View style={styles.computerAttributeRow}>
+                    <Text>Model Number:</Text>
+                    <Text>{ computer.model_number.length > 18 ? (computer.model_number.substring(0, 15) + '...') : computer.model_number }</Text>
+                </View>
+
+                <View style={styles.computerAttributeRow}>
+                    <Text style={styles.capitalizeText}>Color:</Text>    
+                    <Text style={{color: `rgb(${convert.keyword.rgb((computer.color.toLowerCase()))})`, fontWeight:'bold'}}> { computer.color.length > 18 ? (computer.color.substring(0, 15) + '...') : computer.color }</Text>
+                </View>
+
+                <View style={styles.computerAttributeRow}>
+                    <Text>Processor:</Text>        
+                    <Text> { computer.processor.length > 18 ? (computer.processor.substring(0, 15) + '...') : computer.processor }</Text>
+                </View>
+                <View style={styles.computerAttributeRow}>
+                    <Text> Ram:</Text>
+                    <Text> { computer.ram.length > 18 ? (computer.ram.substring(0, 15) + '...') : computer.ram }</Text>
+                </View>
+                <View style={styles.computerAttributeRow}>
+                    <Text> Memory:</Text>
+                    <Text> { computer.memory.length > 18 ? (computer.memory.substring(0, 15) + '...') : computer.memory }</Text>
+                </View>
+                <View style={styles.computerAttributeRow}>
+                    <Text> Vga:</Text>
+                    <Text> { computer.vga.length > 18 ? (computer.vga.substring(0, 15) + '...') : computer.vga }</Text>
+                </View>
+
+                <View style={styles.computerAttributeRow}>
+                    <Text> Operating System:</Text>
+                    <Text> { computer.operating_system.length > 18 ? (computer.operating_system.substring(0, 15) + '...') : computer.operating_system }</Text>
+                </View>
+
+                <View style={styles.computerAttributeRow}>
+                    <Text> Brand:</Text>
+                    <Text style={{fontWeight:'bold', color:'#2089dc'}}>{ computer.brand.length > 18 ? (computer.brand.substring(0, 15) + '...') : computer.brand }</Text>
+                </View>
+
+                <Text style={styles.computerPrice}> $ {computer.price}</Text>
+            </Card>
+        </View>
+    </TouchableHighlight>
+)
+
 
 export default class Products extends React.Component {
 
     constructor(props){
         super(props)
         this.state = {
-            devices: {
-                computers:  [
-                    {
-                        id: 0,
-                        name: 'Acer Nitro 5 15.6-inch Gaming Laptop GTX 1050 - AN515-51-5082',
-                        price: 999,
-                        model_number: 'AN515-AN515-51-5082',
-                        color: 'Red',
-                        processor: 'Intel Core i5-7300HQ 2.50GHz Up To 3.50GHz 6MB Cache',
-                        ram: '8GB DDR4',
-                        memory: 'SSD 256GB',
-                        vga: 'NVIDIA GeForce GTX 1050 4GB',
-                        operating_system: 'Windows 10 Home',
-                        brand: 'Acer',
-                        picture: 'https://macrotronics.net/images/acer-nitro-5-as515-51-5082-2.jpg'
-                    },
-                    {
-                        id: 1,
-                        name: 'Asus ROG Strix 17.3-inch Gaming Laptop GTX 1050 Ti - GL703GE',
-                        price: 1720,
-                        model_number: 'GL703GE-GC102T',
-                        color: 'Gunmetal',
-                        processor: 'Intel Core i7-8750H 2.20GHz Up To 4.10GHz 9MB Cache',
-                        ram: '16 DDR4',
-                        memory: 'HDD 1TB + SSD 256GB',
-                        vga: 'NVIDIA GeForce GTX 1050 TI 4GB',
-                        operating_system: 'Windows 10 (64-bit)',
-                        brand: 'Asus',
-                        picture: 'https://cukusa.com/media/catalog/product/cache/1/image/400x/9df78eab33525d08d6e5fb8d27136e95/l/t/lt-as-0213_main_1.jpg'
-                    },
-                    {
-                        id: 2,
-                        name: 'Lenovo IdeaPad P130-15IKB 15.6-inch Laptop - 81H7000RAX',
-                        price: 488,
-                        model_number: '81H7000RAX',
-                        color: 'Black',
-                        processor: 'Intel Core i3-8130U 2.20GHz Up To 3.40GHz 4MB Cache',
-                        ram: '4GB',
-                        memory: '1TB HDDB',
-                        vga: 'Nvidia MX110 2GB GDDR5',
-                        operating_system: 'DOS',
-                        brand: 'Lenovo',
-                        picture: 'https://macrotronics.net/images/hp-probook-440-g5-2UB64EA-thumb1.jpg'
-                    }
-                ]
-            }
+            devices: devices
         }
     }
 
@@ -62,29 +76,25 @@ export default class Products extends React.Component {
         alert(`I' m Clicked  ${computer.name}`)
     }
 
+    stringToColour = (str) => {
+        var hash = 0
+        for (var i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash)
+        }
+        console.log(hash)
+        var colour = '#'
+        for (var i = 0; i < 3; i++) {
+            var value = (hash >> (i * 8)) & 0xFF
+            colour += ('00' + value.toString(16)).substr(-2)
+        }
+        return colour
+    }
+
     render() {
         return (
             <View>
                 {
-                    this.state.devices.computers.map((computer, i) => {
-                        return (
-                            <TouchableHighlight underlayColor={'white'} onPress = {() => this.onClickView(computer)} key={i}>
-                           
-                                <View>
-                                    <Card title= {computer.name}>
-                                        <View style={styles.imageContainer}>
-                                            <Image
-                                                style={styles.productImage}
-                                                resizeMode="cover"
-                                                source={{ uri: computer.picture }}
-                                            />
-                                        </View>
-                                        <Text>$ {computer.price}</Text>
-                                    </Card>
-                                </View>
-                            </TouchableHighlight>
-                        )
-                    })
+                    this.state.devices.computers.map((computer, i) => <Product key={i} computer={computer} onClickView={this.onClickView}/>)
                 }
             </View>
         )
@@ -99,5 +109,18 @@ const styles = StyleSheet.create({
     productImage: {
         width: 200, 
         height: 200
+    },
+    computerAttributeRow:{ 
+        flex: 1, 
+        flexDirection: 'row', 
+        justifyContent: 'space-between'
+    },
+    computerPrice: {
+        color:'red', 
+        fontWeight:'bold', 
+        fontSize: 19
+    },
+    capitalizeText: {
+        textTransform:'capitalize'
     }
 })
