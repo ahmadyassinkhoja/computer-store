@@ -5,7 +5,7 @@ module.exports = {
     },
     parser: "babel-eslint",
     'extends': [
-        'plugin:react/recommended',
+        // 'plugin:react/recommended',
     ],
     "parserOptions": {
         "ecmaFeatures": {
