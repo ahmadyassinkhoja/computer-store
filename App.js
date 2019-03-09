@@ -17,9 +17,9 @@ class App extends React.Component {
             <View style={{marginBottom: 20}}>
                 <ScrollView>
                     <Header
-                        leftComponent={{ icon: 'menu', color: '#fff' }}
+                        // leftComponent={{ icon: 'menu', color: '#fff' }}
                         centerComponent={{ text: 'Computer Store', style: { color: '#fff' } }}
-                    // rightComponent={{ icon: 'home', color: '#fff' }}
+                        // rightComponent={{ icon: 'home', color: '#fff' }}
                     />
 
                     <Products/>
