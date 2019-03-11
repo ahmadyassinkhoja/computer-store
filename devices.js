@@ -12,7 +12,8 @@ const devices = {
             vga: 'NVIDIA GeForce GTX 1050 4GB',
             operating_system: 'Windows 10 Home',
             brand: 'Acer',
-            picture: 'https://macrotronics.net/images/acer-nitro-5-as515-51-5082-2.jpg'
+            picture: 'https://macrotronics.net/images/acer-nitro-5-as515-51-5082-2.jpg',
+            quantity: 0
         },
         {
             id: 1,
@@ -26,7 +27,8 @@ const devices = {
             vga: 'NVIDIA GeForce GTX 1050 TI 4GB',
             operating_system: 'Windows 10 (64-bit)',
             brand: 'Asus',
-            picture: 'https://cukusa.com/media/catalog/product/cache/1/image/400x/9df78eab33525d08d6e5fb8d27136e95/l/t/lt-as-0213_main_1.jpg'
+            picture: 'https://cukusa.com/media/catalog/product/cache/1/image/400x/9df78eab33525d08d6e5fb8d27136e95/l/t/lt-as-0213_main_1.jpg',
+            quantity: 0
         },
         {
             id: 2,
@@ -40,7 +42,8 @@ const devices = {
             vga: 'Nvidia MX110 2GB GDDR5',
             operating_system: 'DOS',
             brand: 'Lenovo',
-            picture: 'https://macrotronics.net/images/hp-probook-440-g5-2UB64EA-thumb1.jpg'
+            picture: 'https://macrotronics.net/images/hp-probook-440-g5-2UB64EA-thumb1.jpg',
+            quantity: 0
         }
     ]
 }
