@@ -10,37 +10,10 @@ import {
     NavigationActions
 } from 'react-navigation'
 
-import IconBadge from 'react-native-icon-badge'
-
 import Products from './components/Products'
 import Cart from './components/Cart'
 
-
-
-const CartIcon = ({totalQuantity}) => (
-    <View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center'}}>
-        <IconBadge
-            MainElement={
-                <View style={{ width:50, height:50, marginTop: 23}}>
-                    <Icon name='shopping-cart' color='#fff' style={{ width:70, height:70 }}/>
-                </View>
-            }
-            BadgeElement={
-                <Text style={{ color:'#FFFFFF'}}> {totalQuantity} </Text>
-            }
-            IconBadgeStyle={
-                {   
-                    width:20,
-                    height:20,
-                    backgroundColor: 'red',
-                    marginTop: 15,
-                }
-            }
-            Hidden={totalQuantity==0}
-        />
-    </View>
-)
-
+import CartIcon from './components/icons/CartIcon'
 
 class App extends React.Component {
 
@@ -103,6 +76,8 @@ class App extends React.Component {
                     }}
                     rightComponent={<CartIcon totalQuantity={this.state.totalQuantity}/> }
                 />
+
+                <Text> { this.state.totalPrice } </Text>
 
                 <Products addToCart={this.addToCart}/>
                 {
