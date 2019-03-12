@@ -1,12 +1,13 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableHighlight } from 'react-native'
 
 import { Icon  } from 'react-native-elements'
 
 import IconBadge from 'react-native-icon-badge'
 
-const CartIcon = ({totalQuantity}) => (
-    <View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center'}}>
+
+const CartIcon = ({totalQuantity, navigation, purchasedProducts, totalPrice, addToCart, removeFromCart}) => (
+    <TouchableHighlight underlayColor={'white'} style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center'}} onPress={() => navigation.navigate('Cart', {totalQuantity, purchasedProducts, totalPrice, addToCart, removeFromCart})}>
         <IconBadge
             MainElement={
                 <View style={{ width:50, height:50, marginTop: 23}}>
@@ -26,7 +27,7 @@ const CartIcon = ({totalQuantity}) => (
             }
             Hidden={totalQuantity==0}
         />
-    </View>
+    </TouchableHighlight>
 )
 
 export default CartIcon

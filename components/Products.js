@@ -34,7 +34,7 @@ export default class Products extends React.Component {
         return (
             <View>
                 {
-                    this.state.devices.computers.map((computer, i) => <Product key={i} computer={computer} addToCart={this.props.addToCart} />)
+                    this.state.devices.computers.map((computer, i) => <Product key={i} computer={computer} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart} />)
                 }
             </View>
         )

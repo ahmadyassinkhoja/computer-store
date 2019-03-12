@@ -5,7 +5,7 @@ import {  Card, Button, Icon, Input   } from 'react-native-elements'
 
 import convert from 'color-convert'
 
-class Product extends React.Component {
+class CartProduct extends React.Component {
 
     constructor(props){
         super(props)
@@ -14,24 +14,6 @@ class Product extends React.Component {
         }
     }
 
-    addToCart = (product) => {
-        product.quantity++
-        this.setState({noQuantity: false})
-
-        this.props.addToCart(product)
-    }
-    removeFromCart = (product) => {
-        if (product.quantity > 0) {
-            product.quantity--
-            this.setState({noQuantity: false})
-            this.props.removeFromCart(product)
-        }
-
-        if (product.quantity == 0) {
-            this.setState({noQuantity: true})
-        }
-        
-    }
 
     render(){
         return(
@@ -82,39 +64,15 @@ class Product extends React.Component {
                         <Text style={{fontWeight:'bold', color:'#2089dc'}}>{ this.props.computer.brand.length > 18 ? (this.props.computer.brand.substring(0, 15) + '...') : this.props.computer.brand }</Text>
                     </View>
 
-                    <Text style={styles.computerPrice}> $ {this.props.computer.price}</Text>
-
+                    
                     <View style={styles.computerAttributeRow}>
-                        <Button
-                            icon={
-                                <Icon
-                                    name="add-circle"
-                                    size={20}
-                                    color="white"
-                                />
-                            }
-                            onPress={() => this.addToCart(this.props.computer)}
-                        >
-                        </Button>
+                    
+                        <Text style={styles.computerPrice}> $ {this.props.computer.price}</Text>
 
                         <Text style={{marginTop:5, fontWeight:'bold', color:'#2089dc', fontSize:20}}>
                             { this.props.computer.quantity }
                         </Text>
         
-                        <Button
-                            icon={
-                                <Icon
-                                    name="remove-circle"
-                                    size={20}
-                                    color="white"
-                                />
-                            }
-
-                            // *ngIf="item_added"
-                            onPress={() => this.removeFromCart(this.props.computer)}
-                            disabled={this.state.noQuantity}
-                        >
-                        </Button>
                     </View>
                     
 
@@ -124,7 +82,7 @@ class Product extends React.Component {
     }
 } 
 
-export default Product
+export default CartProduct
 
 const styles = StyleSheet.create({
     imageContainer: {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView, Text } from 'react-native'
 
-import { Button, ThemeProvider, Header, Badge, withBadge, Icon  } from 'react-native-elements'
+import { Header, Badge  } from 'react-native-elements'
 
 import {
     createAppContainer,
@@ -21,6 +21,7 @@ class App extends React.Component {
         super(props)
 
         this.state = {
+            navigation: '',
             totalQuantity: 0,
             totalPrice: 0,
             cartEmpty: false,
@@ -29,9 +30,14 @@ class App extends React.Component {
         }
     }
 
+    componentDidMount(){
+        const navigation = this.props.navigation
+        this.setState({navigation})
+    }
+
     addToCart = (product) => {
         this.setState({cartEmpty: false})
-        this.incrementItemFromCart(product)
+        this.incrementItemFromCart()
         this.calculateTotalPricePerItem(product)
 
         const index = this.state.purchasedProducts.indexOf(product)
@@ -48,11 +54,40 @@ class App extends React.Component {
     }
     
     removeFromCart = (product) => {
+        if (this.checkIfClientOrdered(product)) {
+            this.decrementItemFromCart()
+            this.calculateTotalPricePerItem(product)
+        }
+        if (this.state.totalQuantity <= 0) {
+            this.state.cartEmpty = true
+        }
 
+        this.calculateTotalPrice()
+
+        let totalPrice = this.state.total
+        this.setState({ totalPrice })
+
+        const index = this.state.purchasedProducts.indexOf(product)
+        if (product && product.quantity == 0) {
+            let purchasedProducts = this.state.purchasedProducts
+            purchasedProducts.splice(index, 1)
+            this.setState({purchasedProducts})
+        }
+    }
+    checkIfClientOrdered(product) {
+        if (product.quantity >= 0) {
+            return true
+        }
+        return false
     }
 
-    incrementItemFromCart = (product) => {
+    incrementItemFromCart = () => {
         let totalQuantity = this.state.totalQuantity + 1
+        this.setState({ totalQuantity })
+    }
+
+    decrementItemFromCart() {
+        let totalQuantity = this.state.totalQuantity - 1
         this.setState({ totalQuantity })
     }
 
@@ -72,14 +107,14 @@ class App extends React.Component {
                 <Header
                     centerComponent={{
                         text: 'Computer Store',
-                        style: { color: '#fff' }
+                        style: { color: '#fff', fontSize:18, fontWeight:'bold' }
                     }}
-                    rightComponent={<CartIcon totalQuantity={this.state.totalQuantity}/> }
+                    rightComponent={<CartIcon addToCart={this.addToCart} removeFromCart={this.removeFromCart} purchasedProducts={this.state.purchasedProducts} totalPrice={this.state.totalPrice} totalQuantity={this.state.totalQuantity} navigation={this.state.navigation} /> }
                 />
 
                 <Text> { this.state.totalPrice } </Text>
 
-                <Products addToCart={this.addToCart}/>
+                <Products addToCart={this.addToCart} removeFromCart={this.removeFromCart}/>
                 {
                     !this.state.cartEmpty ? 
                         <View style={styles.shopping}>
