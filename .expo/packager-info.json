@@ -1,10 +1,10 @@
 {
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://2x-isi.anonymous.computerstore.exp.direct",
+  "packagerNgrokUrl": "https://packager.2x-isi.anonymous.computerstore.exp.direct",
+  "ngrokPid": 7256,
   "devToolsPort": 19002,
-  "packagerPort": null,
-  "packagerPid": null,
+  "packagerPort": 19001,
+  "packagerPid": 19636,
   "webpackServerPort": null
 }
