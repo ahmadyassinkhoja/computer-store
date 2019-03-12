@@ -23,21 +23,30 @@ class Cart extends React.Component {
 
 
         return(
-            <ScrollView>
+            <View style={{ flex: 1, position: 'relative'}}>
                 <Header
+                    style={{position: 'absolute',
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0}}
                     centerComponent={{
                         text: 'MY CART',
                         style: { color: '#fff', fontSize:18, fontWeight:'bold' }
                     }}
                     leftComponent={<Icon name='arrow-back' color='#fff' onPress={() => this.props.navigation.goBack() } /> }
                 />
+                
+                <ScrollView style={{marginBottom:20}}>
 
-                <Text> {totalPrice} </Text>
-                {
-                    totalQuantity == 0 ?  
-                        <EmptyCartCard navigation={this.props.navigation}/> : purchasedProducts.map( (computer, i) => <CartProduct key={i} computer={computer} />)
-                }
-            </ScrollView>
+                    <Text> {totalPrice} </Text>
+                    {
+                        totalQuantity == 0 ?  
+                            <EmptyCartCard navigation={this.props.navigation}/> 
+                            : purchasedProducts.map( (computer, i) => <CartProduct key={i} computer={computer} />)
+                    }
+                </ScrollView>
+            </View>
         )
     }
 }

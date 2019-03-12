@@ -103,8 +103,13 @@ class App extends React.Component {
 
     render() {
         return (
-            <ScrollView>
+            <View style={{ flex: 1, position: 'relative'}}>
                 <Header
+                    style={{position: 'absolute',
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0}}
                     centerComponent={{
                         text: 'Computer Store',
                         style: { color: '#fff', fontSize:18, fontWeight:'bold' }
@@ -112,25 +117,10 @@ class App extends React.Component {
                     rightComponent={<CartIcon addToCart={this.addToCart} removeFromCart={this.removeFromCart} purchasedProducts={this.state.purchasedProducts} totalPrice={this.state.totalPrice} totalQuantity={this.state.totalQuantity} navigation={this.state.navigation} /> }
                 />
 
-                <Text> { this.state.totalPrice } </Text>
-
-                <Products addToCart={this.addToCart} removeFromCart={this.removeFromCart}/>
-                {
-                    !this.state.cartEmpty ? 
-                        <View style={styles.shopping}>
-                            <View onPress={() => this.props.navigation.navigate('Cart')} style={{alignItems: 'center'}}>
-                                <Badge value={this.state.totalQuantity} />
-                                <Text>
-                        CheckOut
-                                </Text>
-
-                                <Badge value={this.state.totalPrice} />
-                            </View>
-                        </View>
-
-                        : null
-                }
-            </ScrollView>
+                <ScrollView style={{marginBottom:20}}>
+                    <Products addToCart={this.addToCart} removeFromCart={this.removeFromCart}/>
+                </ScrollView>
+            </View>
         )
     }
 }
