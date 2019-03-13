@@ -17,67 +17,24 @@ class CartProduct extends React.Component {
 
     render(){
         return(
-            <View>
-                <Card title= {this.props.computer.name}>
-                    <View style={styles.imageContainer}>
-                        <Image
-                            style={styles.productImage}
-                            resizeMode="cover"
-                            source={{ uri: this.props.computer.picture }}
-                        />
-                    </View>
-
-                    <View style={styles.computerAttributeRow}>
-                        <Text>Model Number:</Text>
-                        <Text>{ this.props.computer.model_number.length > 18 ? (this.props.computer.model_number.substring(0, 15) + '...') : this.props.computer.model_number }</Text>
-                    </View>
-
-                    <View style={styles.computerAttributeRow}>
-                        <Text style={styles.capitalizeText}>Color:</Text>    
-                        <Text style={{color: `rgb(${convert.keyword.rgb((this.props.computer.color.toLowerCase()))})`, fontWeight:'bold'}}> { this.props.computer.color.length > 18 ? (this.props.computer.color.substring(0, 15) + '...') : this.props.computer.color }</Text>
-                    </View>
-
-                    <View style={styles.computerAttributeRow}>
-                        <Text>Processor:</Text>        
-                        <Text> { this.props.computer.processor.length > 18 ? (this.props.computer.processor.substring(0, 15) + '...') : this.props.computer.processor }</Text>
-                    </View>
-                    <View style={styles.computerAttributeRow}>
-                        <Text> Ram:</Text>
-                        <Text> { this.props.computer.ram.length > 18 ? (this.props.computer.ram.substring(0, 15) + '...') : this.props.computer.ram }</Text>
-                    </View>
-                    <View style={styles.computerAttributeRow}>
-                        <Text> Memory:</Text>
-                        <Text> { this.props.computer.memory.length > 18 ? (this.props.computer.memory.substring(0, 15) + '...') : this.props.computer.memory }</Text>
-                    </View>
-                    <View style={styles.computerAttributeRow}>
-                        <Text> Vga:</Text>
-                        <Text> { this.props.computer.vga.length > 18 ? (this.props.computer.vga.substring(0, 15) + '...') : this.props.computer.vga }</Text>
-                    </View>
-
-                    <View style={styles.computerAttributeRow}>
-                        <Text> Operating System:</Text>
-                        <Text> { this.props.computer.operating_system.length > 18 ? (this.props.computer.operating_system.substring(0, 15) + '...') : this.props.computer.operating_system }</Text>
-                    </View>
-
-                    <View style={styles.computerAttributeRow}>
-                        <Text> Brand:</Text>
-                        <Text style={{fontWeight:'bold', color:'#2089dc'}}>{ this.props.computer.brand.length > 18 ? (this.props.computer.brand.substring(0, 15) + '...') : this.props.computer.brand }</Text>
-                    </View>
-
+            <View style={styles.computerAttributeRow}>
+                <View style={{width:'25%',}}>
+                    <Image
+                        style={styles.productImage}
+                        resizeMode="cover"
+                        source={{ uri: this.props.computer.picture }}
+                    />
+                </View>
+                <View style={{width:'50%'}}>
+                    <Text> { this.props.computer.name} </Text>
                     
-                    <View style={styles.computerAttributeRow}>
-                    
-                        <Text style={styles.computerPrice}> $ {this.props.computer.price}</Text>
-
-                        <Text style={{marginTop:5, fontWeight:'bold', color:'#2089dc', fontSize:20}}>
-                            { this.props.computer.quantity }
-                        </Text>
-        
-                    </View>
-                    
-
-                </Card>
-            </View>
+                </View>
+                <View style={{width:'25%', height:'100%'}}>
+                    <Text style={styles.computerQuantity}> {this.props.computer.quantity} </Text>
+                    <Text style={styles.computerPrice}> $ {this.props.computer.price} </Text>
+                </View>
+                        
+            </View>  
         )
     }
 } 
@@ -90,18 +47,33 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     productImage: {
-        width: 200, 
-        height: 200
+        width: 60, 
+        height: 60
     },
     computerAttributeRow:{ 
         flex: 1, 
         flexDirection: 'row', 
-        justifyContent: 'space-between'
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomWidth: 2,
+        borderBottomColor:'#eee',
+        marginTop: 20
+    },
+    computerQuantity:{
+        color:'#2089dc', 
+        fontWeight:'bold', 
+        fontSize: 15,
+        position:'absolute',
+        top:0,
+        right: 0
     },
     computerPrice: {
         color:'red', 
         fontWeight:'bold', 
-        fontSize: 19
+        fontSize: 15,
+        position:'absolute',
+        bottom:0,
+        right: 0
     },
     capitalizeText: {
         textTransform:'capitalize'

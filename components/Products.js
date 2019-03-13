@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image, Dimensions, TouchableHighlight } from 'r
 
 import {  Card, Button, Icon, Input   } from 'react-native-elements'
 
-import devices from '../devices'
+
 
 import Product from './Product' 
 
@@ -12,7 +12,7 @@ export default class Products extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            devices: devices
+            
         }
     }
 
@@ -34,7 +34,7 @@ export default class Products extends React.Component {
         return (
             <View>
                 {
-                    this.state.devices.computers.map((computer, i) => <Product key={i} computer={computer} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart} />)
+                    this.props.devices.map((computer, i) => <Product key={i} computer={computer} addToCart={this.props.addToCart} removeFromCart={this.props.removeFromCart} />)
                 }
             </View>
         )

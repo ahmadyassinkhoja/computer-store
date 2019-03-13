@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, Dimensions, TouchableHighlight, ScrollView } from 'react-native'
+import { StyleSheet, View, Text, Image, Dimensions, ScrollView, TouchableHighlight } from 'react-native'
 
 import {  Card, Button, Icon, Input, Header, Badge } from 'react-native-elements'
 
@@ -9,18 +9,16 @@ import CartProduct from './CartProduct'
 
 class Cart extends React.Component {
 
-    componentDidMount(){
-        // console.log('totalPrice', this.props.navigation.getParam('totalPrice'))
-        // console.log('totalQuantity', this.props.navigation.getParam('totalQuantity'))
-        // console.log('purchasedProducts', this.props.navigation.getParam('purchasedProducts'))
+    checkout = () => {
+        const AppCheckout = this.props.navigation.getParam('checkout')
+
+        AppCheckout()
     }
+
     render(){
         const totalPrice = this.props.navigation.getParam('totalPrice')
         const totalQuantity = this.props.navigation.getParam('totalQuantity')
         const purchasedProducts = this.props.navigation.getParam('purchasedProducts')
-        // const addToCart = this.props.navigation.getParam('addToCart')
-        // const removeFromCart = this.props.navigation.getParam('removeFromCart')
-
 
         return(
             <View style={{ flex: 1, position: 'relative'}}>
@@ -38,17 +36,63 @@ class Cart extends React.Component {
                 />
                 
                 <ScrollView style={{marginBottom:20}}>
-
-                    <Text> {totalPrice} </Text>
                     {
                         totalQuantity == 0 ?  
                             <EmptyCartCard navigation={this.props.navigation}/> 
                             : purchasedProducts.map( (computer, i) => <CartProduct key={i} computer={computer} />)
                     }
                 </ScrollView>
+
+                {
+                    totalQuantity == 0 ? null :  
+                        <View>
+                    
+                            <View  style={{position: 'absolute',
+                                bottom: 60,
+                                left: 0,
+                                right: 0, backgroundColor:'#ee3', width:'100%', height:50, padding:20}}>
+                                <View style={styles.computerAttributeRow}>
+                                    <View style={{width:'60%'}}>
+                                        <Text style={{fontWeight:'bold'}}> Subtotal </Text>      
+    
+                                    </View>
+                                    <View style={{width:'30%'}}>
+                                        <Text style={styles.computerPrice}> $ { totalPrice } </Text>      
+                                    </View>
+                                
+                                </View>  
+                            </View>
+                   
+                            <TouchableHighlight onPress={this.checkout} style={{position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                right: 0, backgroundColor:'#33cc33', width:'100%', height:50, padding:30}}>
+                                <View style={styles.computerAttributeRow}>
+                                    <View style={{width:'90%'}}>
+                                        <Text style={{fontWeight:'bold', color:'white', textAlign:'center'}}> Check Out </Text>      
+    
+                                    </View>
+                                </View>  
+                            </TouchableHighlight>
+                        </View>
+                }
             </View>
         )
     }
 }
 
 export default Cart
+
+const styles = StyleSheet.create({
+    computerAttributeRow:{ 
+        flex: 1, 
+        flexDirection: 'row', 
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    computerPrice: {
+        color:'red', 
+        fontWeight:'bold', 
+        fontSize: 19
+    }
+})

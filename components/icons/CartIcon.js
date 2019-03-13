@@ -6,8 +6,8 @@ import { Icon  } from 'react-native-elements'
 import IconBadge from 'react-native-icon-badge'
 
 
-const CartIcon = ({totalQuantity, navigation, purchasedProducts, totalPrice, addToCart, removeFromCart}) => (
-    <TouchableHighlight underlayColor={'white'} style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center'}} onPress={() => navigation.navigate('Cart', {totalQuantity, purchasedProducts, totalPrice, addToCart, removeFromCart})}>
+const CartIcon = ({totalQuantity, navigation, purchasedProducts, totalPrice, addToCart, removeFromCart, checkout}) => (
+    <TouchableHighlight underlayColor={'white'} style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center'}} onPress={() => navigation.navigate('Cart', {totalQuantity, purchasedProducts, totalPrice, addToCart, removeFromCart, checkout})}>
         <IconBadge
             MainElement={
                 <View style={{ width:50, height:50, marginTop: 23}}>

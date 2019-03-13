@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView, Text } from 'react-native'
 
-import { Header, Badge  } from 'react-native-elements'
+import { Header, Badge, Platform } from 'react-native-elements'
 
 import {
     createAppContainer,
@@ -15,6 +15,8 @@ import Cart from './components/Cart'
 
 import CartIcon from './components/icons/CartIcon'
 
+// import devices from './devices'
+
 class App extends React.Component {
 
     constructor(props){
@@ -22,17 +24,24 @@ class App extends React.Component {
 
         this.state = {
             navigation: '',
+            cartEmpty: false,
             totalQuantity: 0,
             totalPrice: 0,
-            cartEmpty: false,
+            total: 0,
             purchasedProducts: [],
-            total: 0
+            orders: [],
+            devices: []
         }
     }
 
     componentDidMount(){
         const navigation = this.props.navigation
         this.setState({navigation})
+
+        fetch('https://areeba-computer-store.herokuapp.com/items')
+            .then(res => res.json())
+            .then(items => this.setState({devices: items}))
+            .catch(err => console.log(err))
     }
 
     addToCart = (product) => {
@@ -101,6 +110,50 @@ class App extends React.Component {
         }, 0)
     }
 
+    checkout = () => {
+        const order_data = {
+            purchasedProducts: this.state.purchasedProducts,
+            total_price: this.state.totalPrice,
+            total_quantity: this.state.totalQuantity,
+        }
+        // this.addOrder(order_data)
+        // this.resetCartProducts()
+
+        fetch('https://areeba-computer-store.herokuapp.com/addOrder', {
+            method: 'POST',
+            body: JSON.stringify(order_data),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(order => console.log(order))
+            .catch(err => console.log(err))
+    }
+    addOrder(order_data) {
+        let orders = this.state.orders
+        orders.push(order_data)
+
+        this.setState({orders})
+    }
+
+    resetCartProducts() {
+        let totalQuantity = this.state.totalQuantity
+        let totalPrice = this.state.totalPrice
+        let purchasedProducts = this.state.purchasedProducts
+        let cartEmpty = this.state.cartEmpty
+        
+        totalQuantity = 0
+        totalPrice = 0
+        purchasedProducts = []
+        cartEmpty = true
+
+        this.setState({totalQuantity, totalPrice, purchasedProducts, cartEmpty})
+
+        this.props.navigation.navigate('Home')
+    }
+
     render() {
         return (
             <View style={{ flex: 1, position: 'relative'}}>
@@ -114,11 +167,10 @@ class App extends React.Component {
                         text: 'Computer Store',
                         style: { color: '#fff', fontSize:18, fontWeight:'bold' }
                     }}
-                    rightComponent={<CartIcon addToCart={this.addToCart} removeFromCart={this.removeFromCart} purchasedProducts={this.state.purchasedProducts} totalPrice={this.state.totalPrice} totalQuantity={this.state.totalQuantity} navigation={this.state.navigation} /> }
+                    rightComponent={<CartIcon checkout={this.checkout} addToCart={this.addToCart} removeFromCart={this.removeFromCart} purchasedProducts={this.state.purchasedProducts} totalPrice={this.state.totalPrice} totalQuantity={this.state.totalQuantity} navigation={this.state.navigation} /> }
                 />
-
                 <ScrollView style={{marginBottom:20}}>
-                    <Products addToCart={this.addToCart} removeFromCart={this.removeFromCart}/>
+                    <Products devices={this.state.devices} addToCart={this.addToCart} removeFromCart={this.removeFromCart}/>
                 </ScrollView>
             </View>
         )
