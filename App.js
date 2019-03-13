@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, Text } from 'react-native'
+import { StyleSheet, View, ScrollView, Text , Modal, TouchableHighlight } from 'react-native'
 
-import { Header, Badge, Platform } from 'react-native-elements'
+import { Header, Badge, Platform, Icon } from 'react-native-elements'
 
 import {
     createAppContainer,
@@ -12,10 +12,11 @@ import {
 
 import Products from './components/Products'
 import Cart from './components/Cart'
+import Admin from './components/Admin'
+import MainMenu from './components/MainMenu'
 
 import CartIcon from './components/icons/CartIcon'
-
-// import devices from './devices'
+import MainMenuIcon from './components/icons/MainMenuIcon'
 
 class App extends React.Component {
 
@@ -29,15 +30,23 @@ class App extends React.Component {
             totalPrice: 0,
             total: 0,
             purchasedProducts: [],
-            orders: [],
-            devices: []
+            devices: [],
+            modalVisible: false,
         }
+    }
+
+    setModalVisible = (visible) => {
+        this.setState({modalVisible: visible})
     }
 
     componentDidMount(){
         const navigation = this.props.navigation
         this.setState({navigation})
 
+        this.getItems()
+    }
+
+    getItems = () => {
         fetch('https://areeba-computer-store.herokuapp.com/items')
             .then(res => res.json())
             .then(items => this.setState({devices: items}))
@@ -116,10 +125,14 @@ class App extends React.Component {
             total_price: this.state.totalPrice,
             total_quantity: this.state.totalQuantity,
         }
-        // this.addOrder(order_data)
-        // this.resetCartProducts()
+        this.addOrder(order_data)
+        this.resetCartProducts()
 
-        fetch('https://areeba-computer-store.herokuapp.com/addOrder', {
+        // todo change the fetch with this one -->
+        // https://areeba-computer-store.herokuapp.com/addOrder
+    }
+    addOrder(order_data) {
+        fetch('http://192.168.1.71:8500/addOrder', {
             method: 'POST',
             body: JSON.stringify(order_data),
             headers: {
@@ -127,15 +140,9 @@ class App extends React.Component {
                 'Content-Type': 'application/json'
             }
         })
-            .then(res => res.json())
-            .then(order => console.log(order))
+            .then(res => res.text())
+            .then(responseData => console.log(responseData.body ))
             .catch(err => console.log(err))
-    }
-    addOrder(order_data) {
-        let orders = this.state.orders
-        orders.push(order_data)
-
-        this.setState({orders})
     }
 
     resetCartProducts() {
@@ -148,6 +155,8 @@ class App extends React.Component {
         totalPrice = 0
         purchasedProducts = []
         cartEmpty = true
+
+        this.getItems()
 
         this.setState({totalQuantity, totalPrice, purchasedProducts, cartEmpty})
 
@@ -163,12 +172,19 @@ class App extends React.Component {
                         bottom: 0,
                         left: 0,
                         right: 0}}
+                    leftComponent={
+                        <MainMenuIcon setModalVisible={this.setModalVisible}/>
+                    }
                     centerComponent={{
                         text: 'Computer Store',
                         style: { color: '#fff', fontSize:18, fontWeight:'bold' }
                     }}
                     rightComponent={<CartIcon checkout={this.checkout} addToCart={this.addToCart} removeFromCart={this.removeFromCart} purchasedProducts={this.state.purchasedProducts} totalPrice={this.state.totalPrice} totalQuantity={this.state.totalQuantity} navigation={this.state.navigation} /> }
                 />
+                
+                <MainMenu navigation={this.state.navigation} modalVisible={this.state.modalVisible} setModalVisible={this.setModalVisible}/>
+
+             
                 <ScrollView style={{marginBottom:20}}>
                     <Products devices={this.state.devices} addToCart={this.addToCart} removeFromCart={this.removeFromCart}/>
                 </ScrollView>
@@ -184,6 +200,9 @@ const AppNavigator = createStackNavigator(
         },
         Cart: {
             screen: Cart
+        },
+        Admin: {
+            screen: Admin
         }
     },
     {
@@ -196,7 +215,4 @@ export default createAppContainer(AppNavigator)
 
 
 const styles = StyleSheet.create({
-    shopping: {
-
-    }
 })
