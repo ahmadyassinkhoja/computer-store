@@ -1,19 +1,21 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, Text , Modal, TouchableHighlight } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 
-import { Header, Badge, Platform, Icon } from 'react-native-elements'
+import { Header } from 'react-native-elements'
 
 import {
     createAppContainer,
     createStackNavigator,
-    StackActions,
-    NavigationActions
 } from 'react-navigation'
 
 import Products from './components/Products'
 import Cart from './components/Cart'
-import Admin from './components/Admin'
 import MainMenu from './components/MainMenu'
+import Admin from './components/Admin'
+import AddProduct from './components/AddProduct'
+import EditProduct from './components/EditProduct'
+import Orders from './components/Orders'
+import OrderDetails from './components/OrderDetails'
 
 import CartIcon from './components/icons/CartIcon'
 import MainMenuIcon from './components/icons/MainMenuIcon'
@@ -132,7 +134,7 @@ class App extends React.Component {
         // https://areeba-computer-store.herokuapp.com/addOrder
     }
     addOrder(order_data) {
-        fetch('http://192.168.1.71:8500/addOrder', {
+        fetch('https://areeba-computer-store.herokuapp.com/addOrder', {
             method: 'POST',
             body: JSON.stringify(order_data),
             headers: {
@@ -203,10 +205,22 @@ const AppNavigator = createStackNavigator(
         },
         Admin: {
             screen: Admin
+        },
+        AddProduct: {
+            screen: AddProduct
+        },
+        EditProduct: {
+            screen: EditProduct
+        },
+        Orders: {
+            screen: Orders
+        },
+        'OrderDetails': {
+            screen: OrderDetails
         }
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Admin',
         headerMode: 'none'
     }
 )
