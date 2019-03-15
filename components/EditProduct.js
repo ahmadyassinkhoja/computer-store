@@ -1,10 +1,9 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, Text , Modal, TouchableHighlight } from 'react-native'
+import { StyleSheet, View, ScrollView, Text, TouchableHighlight } from 'react-native'
 
-import { Header, Badge, Platform, Icon, Input  } from 'react-native-elements'
+import { Header, Icon, Input  } from 'react-native-elements'
 
 import MainMenu from './MainMenu'
-
 import MainMenuIcon from './icons/MainMenuIcon'
 import AdminFooterToolbar from './AdminFooterToolbar'
 
@@ -23,9 +22,6 @@ const EditProductInput = ({product ,item, handleTextChange}) => (
             placeholder={item.name}
             onChangeText={(text) => handleTextChange(text, item)}
             value={product[item.key].toString()}
-
-            // errorStyle={{ color: 'red' }}
-            // errorMessage='ENTER A VALID ERROR HERE'
         />
     </View>
 )

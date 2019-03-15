@@ -1,34 +1,14 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, Text , Modal, TouchableHighlight } from 'react-native'
+import { StyleSheet, View, ScrollView, Text, TouchableHighlight } from 'react-native'
 
-import { Header, Badge, Platform, Icon, Input  } from 'react-native-elements'
+import { Header } from 'react-native-elements'
 
 import MainMenu from './MainMenu'
-
 import MainMenuIcon from './icons/MainMenuIcon'
 import AdminFooterToolbar from './AdminFooterToolbar'
 
 import { itemsFormInput } from '../assets/data/itemsFormInput'
-
-const AddProductInput = ({item, handleTextChange}) => (
-    <View>
-        <Input
-            shake={true}
-            leftIcon={
-                <Icon
-                    name={item.iconName}
-                    size={24}
-                    color='black'
-                />}
-            placeholder={item.name}
-            onChangeText={(text) => handleTextChange(text, item)}
-            value={item.key=='picture' ? 'https://banner2.kisspng.com/20180429/zte/kisspng-computer-icons-avatar-user-laptop-5ae67d2c9fba76.3873242315250547646543.jpg': null}
-
-            // errorStyle={{ color: 'red' }}
-            // errorMessage='ENTER A VALID ERROR HERE'
-        />
-    </View>
-)
+import AddProductInput from './AddProductInput'
 
 class AddProduct extends React.Component {
 

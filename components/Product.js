@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, Dimensions, TouchableHighlight } from 'react-native'
+import { StyleSheet, View, Text, Image } from 'react-native'
 
-import {  Card, Button, Icon, Input   } from 'react-native-elements'
+import {  Card, Button, Icon } from 'react-native-elements'
 
 import convert from 'color-convert'
 
@@ -109,8 +109,6 @@ class Product extends React.Component {
                                     color="white"
                                 />
                             }
-
-                            // *ngIf="item_added"
                             onPress={() => this.removeFromCart(this.props.computer)}
                             disabled={this.state.noQuantity}
                         >

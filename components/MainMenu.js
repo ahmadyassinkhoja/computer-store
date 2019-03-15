@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text , Modal, TouchableHighlight } from 'react-native'
+import { View, Modal, TouchableHighlight } from 'react-native'
 import { Icon, ListItem} from 'react-native-elements'
 
 const list = [
@@ -24,8 +24,6 @@ const MainMenu = ({navigation, modalVisible, setModalVisible}) => (
             Alert.alert('Modal has been closed.')
         }}>
         <View style={{backgroundColor:'#eee', height:'100%'}}>
-        
-       
             <View style={{position:'relative',  flex: 1,
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -56,10 +54,7 @@ const MainMenu = ({navigation, modalVisible, setModalVisible}) => (
                     ))
                 }
             </View>
-
         </View>
-        
-
     </Modal>
 )
 

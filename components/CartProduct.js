@@ -1,19 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, Dimensions, TouchableHighlight } from 'react-native'
-
-import {  Card, Button, Icon, Input   } from 'react-native-elements'
-
-import convert from 'color-convert'
+import { StyleSheet, View, Text, Image } from 'react-native'
 
 class CartProduct extends React.Component {
-
-    constructor(props){
-        super(props)
-        this.state = {
-            noQuantity: false
-        }
-    }
-
 
     render(){
         return(

@@ -1,9 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, Text, TouchableHighlight, Image  } from 'react-native'
+import { StyleSheet, View, ScrollView, Text, Image  } from 'react-native'
 
-import { Header, Badge, Platform, Icon, Card, ListItem } from 'react-native-elements'
-
-import MainMenu from './MainMenu'
+import { Header, Icon } from 'react-native-elements'
 
 import AdminFooterToolbar from './AdminFooterToolbar'
 
@@ -65,8 +63,7 @@ class OrderDetails extends React.Component {
                         </View>
                         <View style={{width:'20%'}}>
                             <Text style={styles.computerPrice}> $ { order.total_price } </Text>      
-                        </View>
-                                    
+                        </View>           
                     </View>  
                 </View>
 

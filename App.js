@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView } from 'react-native'
+import { View, ScrollView } from 'react-native'
 
 import { Header } from 'react-native-elements'
 
@@ -129,9 +129,6 @@ class App extends React.Component {
         }
         this.addOrder(order_data)
         this.resetCartProducts()
-
-        // todo change the fetch with this one -->
-        // https://areeba-computer-store.herokuapp.com/addOrder
     }
     addOrder(order_data) {
         fetch('https://areeba-computer-store.herokuapp.com/addOrder', {
@@ -226,7 +223,3 @@ const AppNavigator = createStackNavigator(
 )
 
 export default createAppContainer(AppNavigator)
-
-
-const styles = StyleSheet.create({
-})

@@ -1,20 +1,8 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image, Dimensions, TouchableHighlight } from 'react-native'
-
-import {  Card, Button, Icon, Input   } from 'react-native-elements'
-
-
+import { View } from 'react-native'
 
 import Product from './Product' 
-
 export default class Products extends React.Component {
-
-    constructor(props){
-        super(props)
-        this.state = {
-            
-        }
-    }
 
     stringToColour = (str) => {
         var hash = 0

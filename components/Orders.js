@@ -1,23 +1,13 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, Text, TouchableHighlight  } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 
-import { Header, Badge, Platform, Icon, Card, ListItem } from 'react-native-elements'
+import { Header } from 'react-native-elements'
 
 import MainMenu from './MainMenu'
 
 import MainMenuIcon from './icons/MainMenuIcon'
 import AdminFooterToolbar from './AdminFooterToolbar'
-
-const Order = ({order, navigation, index}) => (
-    <TouchableHighlight onPress={() => navigation.navigate('OrderDetails', {order})}>
-        <ListItem
-            style={{ borderBottomColor:'#ddd', borderBottomWidth: 1}}
-            title={`Order # ${index+1}`}
-            leftIcon={{ name: 'shop' }}
-            rightIcon={{ name: 'chevron-right' }}
-        />
-    </TouchableHighlight>
-)
+import Order from './Order'
 
 class Orders extends React.Component {
 
@@ -67,7 +57,9 @@ class Orders extends React.Component {
 
                 <ScrollView style={{marginBottom:70}}>
                     {
-                        this.state.orders ? this.state.orders.map( (order, i) => <Order index={i} key={i} order={order} navigation={this.props.navigation}/>) : null
+                        this.state.orders ? this.state.orders.map( (order, i) => 
+                            <Order index={i} key={i} order={order} navigation={this.props.navigation}/>) 
+                            : null
                     }
 
                 </ScrollView>

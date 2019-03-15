@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, Text , Modal, TouchableHighlight, Image } from 'react-native'
+import { StyleSheet, View, Text , Image } from 'react-native'
 
-import { Header, Badge, Platform, Icon, Button, Card } from 'react-native-elements'
+import { Button, Card } from 'react-native-elements'
 
 import convert from 'color-convert'
 

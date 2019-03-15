@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image, Dimensions, ScrollView, TouchableHighlight } from 'react-native'
 
-import {  Card, Button, Icon, Input, Header, Badge } from 'react-native-elements'
+import { Icon, Header } from 'react-native-elements'
 
 import EmptyCartCard from './EmptyCartCard'
 

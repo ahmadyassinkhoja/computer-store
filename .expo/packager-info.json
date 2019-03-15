@@ -1,10 +1,10 @@
 {
   "webpackServerPort": null,
-  "expoServerNgrokUrl": "https://86-jdu.anonymous.computer-store.exp.direct",
-  "packagerNgrokUrl": "https://packager.86-jdu.anonymous.computer-store.exp.direct",
-  "ngrokPid": 11396,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 14480
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null
 }
