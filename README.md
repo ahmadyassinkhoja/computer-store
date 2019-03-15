@@ -36,8 +36,8 @@ These steps will allow for local development of the _application_ on your machin
 2.  Clone this repository
 3.  Run `yarn install` from the project root
 4.  Connect Your Phone with the laptop for `USB Debugging`
-5.  Run `npm run android` to start the server on your phone
-6.  In your browser you should access the client application
+5.  Run `npm run android` to start the server on your android phone or `npm run ios` to start the server on your ios phone
+6.  In your phone you should access the Computer Store application
 
 ## Commands
 
@@ -60,17 +60,24 @@ Of course, the project structure will change as the project grows. But we will m
 ├── assets
 │   ├── icon.png
 │   ├── splash.png
-│   └── images
-│       ├── acer.jpg
-|       ├── asus.jpg
-|       └── lenovo.jpg
+│   └── data
+|     └── itemsFormInput.js
 │
 ├── components
 │   ├── icons
-│   │   └── CartIcon.js
+│   │   ├── CartIcon.js
+│   │   └── MainMenuIcon.js
+│   ├── AddProduct.js
+│   ├── Admin.js
+│   ├── AdminFooterToolbar.js
+│   ├── AdminProduct.js
 │   ├── Cart.js
 │   ├── CartProduct.js
+│   ├── EditProduct.js
 │   ├── EmptyCartCard.js
+│   ├── MainMenu.js
+│   ├── OrderDetails.js
+│   ├── Orders.js
 │   ├── Product.js
 │   └── Products.js
 │
@@ -81,7 +88,6 @@ Of course, the project structure will change as the project grows. But we will m
 ├── App.js
 ├── app.json
 ├── babel.config.js
-├── devices.js
 ├── LICENSE
 ├── package.json
 ├── README.md
