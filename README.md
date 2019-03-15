@@ -1,5 +1,7 @@
 # Computer Store Project Front-end
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7bb7745e2d2745d1a4cbd974b921fe19)](https://www.codacy.com/app/ahmadyassinkhoja/computer-store?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ahmadyassinkhoja/computer-store&amp;utm_campaign=Badge_Grade)
+
 ## Getting Started
 
 > This is a living document, so please check back occasionally for changes.
